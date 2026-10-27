@@ -1,30 +1,35 @@
-/* Single source for sidebar and header across all internal screens. */
+/* Shared original sidebar/header: SVG paths and proportions match the reference. */
 (() => {
-  const sidebar = document.getElementById('app-sidebar');
-  if (!sidebar) return;
-  const { escape, icon, modal, hydrateIcons } = TiaLari.ui;
+  const host = document.getElementById('app-sidebar');
+  if (!host) return;
   const page = document.body.dataset.page;
-  const items = [
-    { label: 'Início', icon: 'home', page: 'dashboard' },
-    { label: 'Clientes', icon: 'users', page: 'clientes', child: 'novo-cliente' },
-    { label: 'Pets', icon: 'paw', page: 'pets', child: 'novo-pet' },
-    { label: 'Agendas', icon: 'calendar' },
-    { label: 'Atendimentos', icon: 'clipboard' },
-    { label: 'Pacotes', icon: 'box' },
-    { label: 'Produtos', icon: 'box' },
-    { label: 'Usuários', icon: 'users' }
-  ];
-  const navItems = items.map((item) => {
-    const active = item.page === page || item.child === page;
-    return item.page
-      ? `<a class="nav-link${active ? ' active' : ''}" href="${item.page}.html"${active ? ' aria-current="page"' : ''}>${icon(item.icon)}${item.label}</a>`
-      : `<button type="button" class="nav-link" data-future="${item.label}">${icon(item.icon)}${item.label}</button>`;
-  }).join('');
-  sidebar.innerHTML = `<aside class="app-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar-panel" aria-labelledby="sidebar-title"><div class="offcanvas-body"><div class="sidebar-inner"><button class="icon-button sidebar-close d-lg-none" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebar-panel" aria-label="Fechar menu">${icon('close')}</button><a class="brand" href="dashboard.html" aria-label="Tia Lari — início"><img src="assets/images/logo.png" width="112" height="112" alt="Tia Lari Banho e Tosa"></a><h2 class="sidebar-label mb-1" id="sidebar-title">MENU PRINCIPAL</h2><nav class="nav flex-column sidebar-nav mb-4" aria-label="Menu principal">${navItems}</nav><div class="sidebar-bottom"><nav class="nav sidebar-nav" aria-label="Configurações"><button class="nav-link" type="button" data-future="Configurações">${icon('settings')}Configurações</button></nav><div class="profile"><span class="avatar" aria-hidden="true">TL</span><div><strong>Equipe Tia Lari</strong><small>Atendimento</small></div><a class="profile-logout" href="login.html" aria-label="Voltar à tela de login">${icon('logout')}</a></div></div></div></div></aside>`;
-  document.getElementById('app-header').innerHTML = `<header class="app-header"><button class="icon-button d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar-panel" aria-controls="sidebar-panel" aria-label="Abrir menu">${icon('menu')}</button><p class="app-breadcrumb">Painel / ${escape(document.body.dataset.breadcrumb)}</p><div class="header-tools"><span class="demo-label">Dados de demonstração</span><button class="icon-button" type="button" id="notifications" aria-label="Ver notificações">${icon('bell')}</button><span class="avatar" aria-label="Equipe Tia Lari">TL</span></div></header>`;
-  sidebar.querySelectorAll('[data-future]').forEach((button) => {
-    button.addEventListener('click', () => modal(button.dataset.future, '<p class="mb-0">Este módulo está previsto para uma próxima etapa. Nesta versão, estão disponíveis apenas as seis telas de demonstração.</p>'));
+  host.innerHTML = '<aside class="sidebar" id="sidebar-panel" data-od-id="sidebar"><a class="brand" href="dashboard.html" aria-label="Tia Lari Banho e Tosa — Início" data-od-id="brand"><img src="assets/images/logo.png" width="638" height="637" alt="Tia Lari Banho e Tosa — logotipo oficial" data-od-id="brand-logo" style="clip-path:circle(50% at 50% 50%);border-radius:50%"></a><div class="nav-label">MENU PRINCIPAL<button type="button" class="sidebar-close" aria-label="Fechar menu" data-od-id="sidebar-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><nav class="tl-nav" aria-label="Menu principal"><a href="dashboard.html" class="active" aria-current="page" data-od-id="nav-dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg>Início</a><a href="clientes.html" class=""  data-od-id="nav-clientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></svg>Clientes</a><a href="pets.html" class=""  data-od-id="nav-pets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="7" cy="6" rx="2" ry="3"/><ellipse cx="17" cy="6" rx="2" ry="3"/><ellipse cx="3.5" cy="11" rx="1.5" ry="2.5"/><ellipse cx="20.5" cy="11" rx="1.5" ry="2.5"/><path d="M12 11c-3 0-4 4-6 6-2 3 0 5 3 4l3-1 3 1c3 1 5-1 3-4-2-2-3-6-6-6Z"/></svg>Pets</a><button type="button" data-unavailable="Agendas" data-od-id="nav-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>Agendas</button><button type="button" data-unavailable="Atendimentos" data-od-id="nav-atendimentos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5v17h14V4h-4M8 10h8M8 14h8M8 18h5"/><rect x="9" y="2" width="6" height="4" rx="1"/></svg>Atendimentos</button><button type="button" data-unavailable="Pacotes" data-od-id="nav-pacotes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5v9l-9 5-9-5V8l9-5Zm0 9v10M3 8l9 4 9-4M7 5.5l9 5"/></svg>Pacotes</button><button type="button" data-unavailable="Produtos" data-od-id="nav-produtos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5v9l-9 5-9-5V8l9-5Zm0 9v10M3 8l9 4 9-4M7 5.5l9 5"/></svg>Produtos</button><button type="button" data-unavailable="Usuários" data-od-id="nav-usuarios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></svg>Usuários</button></nav><div class="sidebar-bottom"><nav class="tl-nav" aria-label="Configurações"><button data-unavailable="Configurações" data-od-id="nav-settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0-6v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/></svg>Configurações</button></nav><div class="profile"><span class="avatar" aria-hidden="true">TL</span><div><strong data-profile-name>Equipe Tia Lari</strong><small data-profile-role>Atendimento</small></div><a href="login.html" aria-label="Sair" data-od-id="logout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v16h5m5-13 5 5-5 5M8 12h12"/></svg></a></div></div></aside>';
+  document.getElementById('app-header').innerHTML = '<div class="topline"><button class="icon-btn mobile-toggle" aria-label="Abrir menu" aria-controls="sidebar-panel" aria-expanded="false" data-od-id="menu-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><nav class="tl-breadcrumb" aria-label="Localização"><a href="dashboard.html">Painel</a><span aria-hidden="true">/</span><span>Visão geral</span></nav><div class="top-tools"><span class="demo">Dados de demonstração</span><button class="icon-btn" aria-label="Notificações" data-od-id="notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button><span class="avatar" aria-label="Equipe Tia Lari">TL</span></div></div>';
+  const { icon, escape, modal } = TiaLari.ui;
+  document.querySelector('.tl-breadcrumb').innerHTML = '<a href="dashboard.html">Painel</a><span>/</span>' + document.body.dataset.breadcrumb.split(' / ').map(value => '<span>' + escape(value) + '</span>').join('<span>/</span>');
+  host.querySelectorAll('.tl-nav a').forEach(link => {
+    const active = link.getAttribute('href') === (page === 'novo-cliente' ? 'clientes' : page === 'novo-pet' ? 'pets' : page) + '.html';
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
-  document.getElementById('notifications').addEventListener('click', () => modal('Notificações', '<p class="mb-0">Nenhuma nova notificação neste ambiente de demonstração.</p>'));
-  hydrateIcons();
+  const panel = document.getElementById('sidebar-panel');
+  const toggle = document.querySelector('.mobile-toggle');
+  const media = matchMedia('(max-width:920px)');
+  let desktopCollapsed = false;
+  function setOpen(open, restoreFocus = false) {
+    if (!open && (restoreFocus || panel.contains(document.activeElement))) toggle.focus();
+    panel.hidden = !open;
+    panel.inert = !open;
+    panel.classList.toggle('open', media.matches && open);
+    document.body.classList.toggle('sidebar-collapsed', !media.matches && !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  }
+  toggle.addEventListener('click', () => { if (!media.matches) desktopCollapsed = !panel.hidden; setOpen(panel.hidden); });
+  panel.querySelector('.sidebar-close').addEventListener('click', () => { if (!media.matches) desktopCollapsed = true; setOpen(false, true); });
+  media.addEventListener('change', () => setOpen(!media.matches && !desktopCollapsed));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden && !document.querySelector('.modal.show')) setOpen(false, true); });
+  setOpen(!media.matches);
+  host.querySelectorAll('[data-unavailable]').forEach(button => button.addEventListener('click', () => modal(button.dataset.unavailable, '<p>Este módulo está fora do escopo destas seis telas.</p>')));
+  document.querySelector('[data-od-id="notifications"]').addEventListener('click', () => modal('Notificações', '<p>Nenhuma nova notificação neste ambiente de demonstração.</p>'));
 })();

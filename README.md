@@ -26,14 +26,20 @@ Acesse **http://localhost:8080**. Todos os recursos usados pelas telas são loca
 
 **Somente telas:** o login aceita uma identificação preenchida e senha com pelo menos quatro caracteres, sem autenticação. Cadastros validam os campos e abrem uma confirmação de simulação; nada é enviado ou armazenado. As listagens não são alteradas após a simulação. Não utilize dados reais. Indicadores, notificações e agenda são demonstrativos. Os demais itens do menu informam que estão fora do escopo.
 
+## Fidelidade visual
+
+Esta versão recupera a composição das capturas originais: listagens em cartões (não tabelas), ícones SVG de patinhas e clientes, menu de 240px, cabeçalho com botão de recolher inclusive no desktop, tipografia, cores, espaçamentos e agenda original. Bootstrap continua local e é usado no grid de cartões, formulários, utilitários e modais. Classes originais conflitantes com Bootstrap foram isoladas com o prefixo `tl-`.
+
+Testes automatizados em Chromium verificaram as seis telas em 1440px e 375px, sem transbordamento horizontal ou erros JavaScript, além de busca, detalhes, estado vazio, menu móvel, validação de formulário e login demonstrativo.
+
 ## Organização
 
 ```text
 assets/
   css/
-    theme.css                 # Tokens, fontes e componentes Bootstrap customizados
-    layout.css                # Menu lateral, cabeçalho e estrutura responsiva
-    pages.css                 # Estilos específicos das telas
+    theme.css                 # Estilos e proporções recuperados da versão original
+    layout.css                # Compatibilidade com Bootstrap e componentes compartilhados
+    pages.css                 # Cartões, formulários e ajustes fiéis às referências
   js/
     components/
       ui.js                   # Ícones, modal, toast e escape de conteúdo
