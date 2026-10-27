@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#283e3b">
+  <title>Clientes · Tia Lari Banho e Tosa</title>
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script defer src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script defer src="assets/js/data/demo.js"></script>
+  <script defer src="assets/js/components/ui.js"></script>
+  <script defer src="assets/js/components/layout.js"></script>
+  <script defer src="assets/js/pages/lists.js"></script>
+</head>
+<body data-page="clientes" data-breadcrumb="Cadastros / Clientes">
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+  <div id="app-sidebar"></div>
+  <div class="app-workspace">
+    <div class="page-container">
+      <div id="app-header"></div>
+      <main id="main-content" tabindex="-1">
+        <header class="page-heading d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+          <div><h1>Clientes</h1><p class="text-body-secondary mb-0 mt-2">Contatos organizados para um atendimento mais próximo.</p></div><a href="novo-cliente.html" class="btn btn-primary"><span data-icon="plus"></span>Cadastrar cliente</a>
+        </header>
+        <section class="card"><div class="card-body"><form class="row g-3 mb-4" role="search" id="filters"><div class="col-lg-6"><label for="search" class="form-label">Buscar clientes</label><div class="search-input"><span data-icon="search"></span><input class="form-control" id="search" type="search" placeholder="Nome, telefone ou pet" autocomplete="off"></div></div><div class="col-sm-6 col-lg-3"><label for="filter" class="form-label">Vínculo com pets</label><select id="filter" class="form-select"><option value="">Todos os clientes</option><option value="with">Com pets</option><option value="without">Sem pets</option></select></div><div class="col-sm-6 col-lg-3"><label for="sort" class="form-label">Ordenar por</label><select id="sort" class="form-select"><option value="recent">Mais recentes</option><option value="asc">Nome: A a Z</option><option value="desc">Nome: Z a A</option></select></div></form><div class="d-flex align-items-center justify-content-between gap-3 mb-3"><h2 class="h5 mb-0">Registros cadastrados</h2><span id="result-count" class="small text-body-secondary" aria-live="polite"></span></div><div class="table-responsive"><table class="table align-middle mb-0"><caption class="visually-hidden">Lista de clientes de demonstração</caption><thead><tr><th scope="col">Cliente</th><th scope="col">Telefone</th><th scope="col">Pet</th><th scope="col">Ações</th></tr></thead><tbody id="records"></tbody></table></div><div id="empty-state" class="empty-state text-center py-5" hidden><span class="icon-tile mx-auto mb-3" data-icon="search"></span><h3 class="h5">Nenhum cliente encontrado</h3><p class="text-body-secondary">Tente outro termo ou altere os filtros.</p><button class="btn btn-outline-primary" type="button" id="clear-filters">Limpar filtros</button></div><div class="list-footer small text-body-secondary mt-3 pt-3">Dados fictícios para visualização das telas.</div></div></section>
+      </main>
+      <footer class="app-footer">Tia Lari Banho e Tosa · Gestão interna · Ambiente de demonstração</footer>
+    </div>
+  </div>
+  <div id="app-feedback"></div>
+</body>
+</html>

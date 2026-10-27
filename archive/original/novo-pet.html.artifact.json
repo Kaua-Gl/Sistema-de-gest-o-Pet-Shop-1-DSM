@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "novo-pet.html",
+  "entry": "novo-pet.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-10-15T02:48:02.626Z",
+  "updatedAt": "2026-10-15T02:48:02.626Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}
